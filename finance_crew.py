@@ -16,17 +16,17 @@ class QueryAnalysisOutput(BaseModel):
     timeframe: str = Field(..., description="Time period (e.g., '1d', '1mo', '1y').")
     action: str = Field(..., description="Action to be performed (e.g., 'fetch', 'plot').")
 
+"""
 llm = LLM(
     model="ollama/deepseek-r1:7b",
     base_url="http://localhost:11434",
     # temperature=0.7
 )
-
-# llm = LLM(
-#     model="openai/gpt-4o",
-#     # temperature=0.7
-# )
-
+"""
+llm = LLM(
+    model="gemini/gemini-1.5-pro",
+    temperature=0.7
+)
 # 1) Query parser agent
 query_parser_agent = Agent(
     role="Stock Data Analyst",

@@ -64,5 +64,3 @@ Once connected, you can chat with your IDE and ask financial questions like:
 
 The AI will spin up the necessary CrewAI agents, fetch the data, and deliver a comprehensive analysis!
 
-## 🤝 Contributing
-Feel free to open issues or submit pull requests if you want to improve FinSight!
