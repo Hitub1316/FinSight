@@ -98,6 +98,6 @@ def run_financial_analysis(query):
 
 if __name__ == "__main__":
     # Run the crew with a query
-    # query = input("Enter the stock to analyze: ")
-    result = crew.kickoff(inputs={"query": "Plot YTD stock gain of Tesla"})
+    query = input("Enter the stock to analyze: ")
+    result = crew.kickoff(inputs={"query": query})
     print(result.raw)
