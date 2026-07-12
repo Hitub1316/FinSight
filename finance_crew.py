@@ -24,7 +24,7 @@ llm = LLM(
 )
 """
 llm = LLM(
-    model="gemini/gemini-1.5-pro",
+    model="gemini/gemini-1.5-pro-latest",
     temperature=0.7
 )
 # 1) Query parser agent
