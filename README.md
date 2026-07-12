@@ -1,57 +1,50 @@
-# MCP-powered Financial Analyst using CrewAI and Deepseek-R1
+# FinSight: AI-Powered Financial Analyst 📈
 
-This project implements a financial analysis agentic workflow that analyzes stock market data and provides insights.
+FinSight is an autonomous financial analysis agent that integrates directly into your IDE via the Model Context Protocol (MCP). Built with **CrewAI** and **Deepseek-R1**, it analyzes stock market data, fetches historical prices, and provides intelligent financial insights right where you work.
 
-We use:
-- CrewAI for multi-agent orchestration.
-- Ollama for serving Deepseek-R1 locally.
-- Cursor IDE as the MCP host.
+Instead of switching back and forth between financial websites and your code, you can just ask your IDE to analyze stock performance, compare companies, and interpret market trends.
+
+## 🚀 Features
+- **Local AI Execution**: Uses Deepseek-R1 via Ollama to keep your analysis private and local.
+- **Multi-Agent Orchestration**: Powered by CrewAI to break down complex financial queries into specialized agent tasks.
+- **IDE Integration**: Runs natively as an MCP server in Cursor or any compatible IDE.
+- **Real-Time Data**: Fetches stock prices, volume, and trends using `yfinance`.
 
 ---
-## Setup and installations
 
-**Install Ollama**
+## 🛠️ Getting Started
 
+### 1. Prerequisites
+- **Python 3.11+**
+- **Docker** (Required by CrewAI for secure code execution)
+- **Ollama** (For running Deepseek-R1 locally)
+
+### 2. Install & Run Ollama
+You'll need Ollama running in the background with the Deepseek-R1 model:
 ```bash
-# Setting up Ollama on linux
-curl -fsSL https://ollama.com/install.sh | sh
-
-# Pull the Deepseek-R1 model
-ollama pull deepseek-r1
+ollama run deepseek-r1
 ```
 
-**Install Dependencies**
+### 3. Install Dependencies
+This project uses `uv` for fast dependency management.
+```bash
+uv sync --python 3.11
+```
 
-   Ensure you have Python 3.12 or later installed.
+### 4. Connect to Your IDE (Cursor)
+To use FinSight directly from your IDE, you need to add it as an MCP server.
 
-   You can use uv to directly install the required dependencies (recommended).
-   ```bash
-    uv sync
-   ```
+1. Open your IDE settings and navigate to **MCP**.
+2. Add a new global MCP server with the following configuration:
 
-   Or you can also use pip to install the following dependencies to your local environment.
-   ```bash
-   pip install crewai crewai-tools ollama mcp pydantic yfinance pandas matplotlib
-   ```
-
----
-
-## Run the project
-
-First, set up your MCP server as follows:
-- Go to Cursor settings
-- Select MCP 
-- Add new global MCP server.
-
-In the JSON file, add this:
 ```json
 {
     "mcpServers": {
         "financial-analyst": {
-         "command": "uv",
+            "command": "uv",
             "args": [
                 "--directory",
-                "absolute/path/to/project_root",
+                "C:/absolute/path/to/FinSight",
                 "run",
                 "server.py"
             ]
@@ -59,27 +52,17 @@ In the JSON file, add this:
     }
 }
 ```
-
-You should now be able to see the MCP server listed in the MCP settings.
-
-In Cursor MCP settings make sure to toggle the button to connect the server to the host. Done! Your server is now up and running. 
-
-You can now chat with Cursor and analyze stock market data. Simply provide the stock symbol and timeframe you want to analyze, and watch the magic unfold.
-
-**Example queries**:
-- "Show me Tesla's stock performance over the last 3 months"
-- "Compare Apple and Microsoft stocks for the past year"
-- "Analyze the trading volume of Amazon stock for the last month"
+3. Restart or reload the MCP server in your IDE.
 
 ---
 
-## 📬 Stay Updated with Our Newsletter!
-**Get a FREE Data Science eBook** 📖 with 150+ essential lessons in Data Science when you subscribe to our newsletter! Stay in the loop with the latest tutorials, insights, and exclusive resources. [Subscribe now!](https://join.dailydoseofds.com)
+## 💡 How to Use It
+Once connected, you can chat with your IDE and ask financial questions like:
+- *"Show me Tesla's stock performance over the last 3 months."*
+- *"Compare Apple and Microsoft stocks for the past year."*
+- *"Analyze the trading volume of Amazon stock for the last month."*
 
-[![Daily Dose of Data Science Newsletter](https://github.com/patchy631/ai-engineering/blob/main/resources/join_ddods.png)](https://join.dailydoseofds.com)
+The AI will spin up the necessary CrewAI agents, fetch the data, and deliver a comprehensive analysis!
 
----
-
-## Contribution
-
-Contributions are welcome! Please fork the repository and submit a pull request with your improvements.
+## 🤝 Contributing
+Feel free to open issues or submit pull requests if you want to improve FinSight!
