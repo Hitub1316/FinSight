@@ -23,10 +23,8 @@ llm = LLM(
     # temperature=0.7
 )
 """
-llm = LLM(
-    model="gemini/gemini-1.5-flash",
-    temperature=0.7
-)
+llm = LLM(model="groq/llama-3.3-70b-versatile", api_key=os.environ.get("GROQ_API_KEY"))
+
 # 1) Query parser agent
 query_parser_agent = Agent(
     role="Stock Data Analyst",
