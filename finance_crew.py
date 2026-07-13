@@ -56,14 +56,19 @@ code_writer_agent = Agent(
 )
 
 code_writer_task = Task(
-    description="""Write Python code to visualize stock data based on the inputs from the stock analyst
+    description="""Write Python code to fetch historical stock data based on the inputs from the stock analyst
                    where you would find stock symbol, timeframe and action.
                    IMPORTANT: 
-                   1. Use `plotly.graph_objects` or `plotly.express` instead of Matplotlib. 
-                   2. Fetch historical data using yfinance and save the raw pandas DataFrame to 'data.csv' in the current directory.
-                   3. Calculate the Mean, Std Dev, current price, and % change. Save these statistics to a file called 'stats.json' in the current directory.
-                   4. Do NOT call `fig.show()`. Just save the data and stats so the UI can render them.""",
-    expected_output="A clean and executable Python script file (.py) that saves 'data.csv' and 'stats.json'.",
+                   1. Fetch historical data using yfinance.
+                   2. Calculate the Mean, Std Dev, current price, and % change.
+                   3. Your script MUST print exactly ONE valid JSON object to standard output and nothing else.
+                   4. The JSON object must have this structure:
+                      {
+                        "data": [{"Date": "2023-01-01", "Close": 150.0}, ...],
+                        "stats": {"current_price": 155.0, "%_change": 3.5, "mean": 140.0, "std_dev": 5.2}
+                      }
+                   5. Do NOT use matplotlib or plotly. Do NOT save to files. Just print the JSON.""",
+    expected_output="A clean and executable Python script file (.py) that prints a JSON object.",
     agent=code_writer_agent,
 )
 
@@ -83,8 +88,9 @@ code_execution_agent = Agent(
 )
 
 code_execution_task = Task(
-    description="""Review and execute the generated Python code by code writer agent to visualize stock data and fix any errors encountered.""",
-    expected_output="A clean, working and executable Python script file (.py) for stock visualization.",
+    description="""Review and execute the generated Python code by code writer agent to fetch stock data and fix any errors encountered.
+                   Your FINAL answer MUST be strictly the raw JSON output produced by the Python script. Do not add any markdown formatting (like ```json), explanations, or conversational text. Just the JSON string.""",
+    expected_output="A raw JSON string containing 'data' and 'stats'.",
     agent=code_execution_agent,
 )
 
