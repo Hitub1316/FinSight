@@ -57,8 +57,13 @@ code_writer_agent = Agent(
 
 code_writer_task = Task(
     description="""Write Python code to visualize stock data based on the inputs from the stock analyst
-                   where you would find stock symbol, timeframe and action.""",
-    expected_output="A clean and executable Python script file (.py) for stock visualization.",
+                   where you would find stock symbol, timeframe and action.
+                   IMPORTANT: 
+                   1. Use `plotly.graph_objects` or `plotly.express` instead of Matplotlib. 
+                   2. Fetch historical data using yfinance and save the raw pandas DataFrame to 'data.csv' in the current directory.
+                   3. Calculate the Mean, Std Dev, current price, and % change. Save these statistics to a file called 'stats.json' in the current directory.
+                   4. Do NOT call `fig.show()`. Just save the data and stats so the UI can render them.""",
+    expected_output="A clean and executable Python script file (.py) that saves 'data.csv' and 'stats.json'.",
     agent=code_writer_agent,
 )
 
@@ -90,13 +95,12 @@ crew = Crew(
     process=Process.sequential
 )
 
-# Function to be wrapped inside MCP tool
-def run_financial_analysis(query):
+# Function to be wrapped inside MCP tool or Streamlit app
+def run_crew(query):
     result = crew.kickoff(inputs={"query": query})
     return result.raw
 
 if __name__ == "__main__":
     # Run the crew with a query
     query = input("Enter the stock to analyze: ")
-    result = crew.kickoff(inputs={"query": query})
-    print(result.raw)
+    print(run_crew(query))
