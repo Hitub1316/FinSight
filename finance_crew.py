@@ -36,7 +36,8 @@ query_parser_agent = Agent(
 )
 
 query_parsing_task = Task(
-    description="Analyze the user query and extract stock details.",
+    description="""Analyze the user query and extract stock details. 
+    IMPORTANT: For Indian stocks, append .NS (NSE) to the symbol, e.g. RELIANCE.NS""",
     expected_output="A dictionary with keys: 'symbol', 'timeframe', 'action'.",
     output_pydantic=QueryAnalysisOutput,
     agent=query_parser_agent,
