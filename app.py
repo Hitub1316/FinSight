@@ -22,7 +22,7 @@ st.markdown("""
         --primary: #6B7A4F;
         --background: #F5F3EE;
         --surface: #D9D6CE;
-        --text: #2B2B26;
+        --text: #1A2415;
         --accent: #B8A369;
     }
 
@@ -104,8 +104,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# Banner Image
+if os.path.exists("assets/banner.png"):
+    st.image("assets/banner.png", use_container_width=True)
+
 # Title
-st.markdown("<h1 style='text-align: center; margin-top: 40px; margin-bottom: 40px; font-size: 48px;'>FinSight</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; margin-top: 20px; margin-bottom: 40px; font-size: 48px;'>FinSight</h1>", unsafe_allow_html=True)
 
 # Sidebar settings
 with st.sidebar:
