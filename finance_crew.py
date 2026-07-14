@@ -4,7 +4,7 @@ import os
 import yfinance as yf
 from pydantic import BaseModel, Field
 from crewai import Agent, Task, Crew, Process, LLM
-from crewai_tools import CodeInterpreterTool, FileReadTool
+
 
 from dotenv import load_dotenv
 
@@ -73,8 +73,7 @@ code_writer_task = Task(
 )
 
 
-# 3) Code interpreter agent (uses code interpreter tool from crewai)
-code_interpreter_tool = CodeInterpreterTool()
+
 
 code_execution_agent = Agent(
     role="Senior Code Execution Expert",
