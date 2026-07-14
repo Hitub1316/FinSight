@@ -27,10 +27,15 @@ st.markdown("""
     }
 
     /* Overall Background and Typography */
-    .stApp {
+    .stApp, .stApp > header {
         background-color: var(--background) !important;
         color: var(--text) !important;
         font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Force text colors across all Streamlit markdown and text elements */
+    p, span, h1, h2, h3, h4, h5, h6, label, .stMarkdown, .stText, [data-testid="stMarkdownContainer"] {
+        color: var(--text) !important;
     }
     
     h1, h2, h3, h4, h5, h6 {
@@ -296,10 +301,10 @@ if analyze_btn and query:
                 # Apply gradient fill aesthetic (Olive green #6B7A4F to Gold #B8A369)
                 fig.update_traces(line_color='#6B7A4F', fill='tozeroy', fillcolor='rgba(184, 163, 105, 0.2)')
                 fig.update_layout(
-                    plot_bgcolor='#F5F3EE',
-                    paper_bgcolor='#F5F3EE',
+                    plot_bgcolor='#D9D6CE',
+                    paper_bgcolor='#D9D6CE',
                     font_family='Inter',
-                    font_color='#2B2B26',
+                    font_color='#1A2415',
                     title_font_family='Playfair Display',
                     margin=dict(l=40, r=40, t=60, b=40)
                 )
